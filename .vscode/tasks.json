@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start Next.js Dev Server",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "dev", "--", "--hostname", "0.0.0.0", "--port", "3000"],
+            "isBackground": true,
+            "problemMatcher": {
+                "pattern": {
+                    "regexp": "^.*$",
+                    "file": 1,
+                    "location": 2,
+                    "message": 3
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "ready - started server on",
+                    "endsPattern": "event - compiled"
+                }
+            }
+        }
+    ]
+}

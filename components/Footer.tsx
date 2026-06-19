@@ -1,0 +1,166 @@
+import Link from 'next/link';
+import { MoleculeMark } from './brand/Logo';
+import { Icon } from './Icon';
+
+const WaIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49" />
+  </svg>
+);
+
+const footerProducts = [
+  { label: 'Caustic Soda', href: '/products/caustic-soda' },
+  { label: 'Sulphuric Acid', href: '/products/sulphuric-acid' },
+  { label: 'PAC Coagulant', href: '/products/pac' },
+  { label: 'SMBS (Sodium Metabisulphite)', href: '/products/smbs' },
+  { label: 'Hydrogen Peroxide', href: '/products/hydrogen-peroxide' },
+  { label: 'Calcium Chloride', href: '/products/calcium-chloride' },
+  { label: 'View All Products →', href: '/products' },
+];
+
+const markets = [
+  { label: 'East Africa', href: '/markets#east-africa' },
+  { label: 'West Africa', href: '/markets#west-africa' },
+  { label: 'GCC & Middle East', href: '/markets#gcc' },
+  { label: 'Southeast Asia', href: '/markets#southeast-asia' },
+];
+
+const company = [
+  { label: 'The Group', href: '/about' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Insights & Articles', href: '/articles' },
+  { label: 'FAQ', href: '/faq' },
+  { label: 'Quality & Docs', href: '/quality' },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-navy border-t border-navy-mid">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+
+          {/* Brand + Contact */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-3 mb-4">
+              <MoleculeMark className="w-10 h-10 flex-shrink-0" />
+              <div>
+                <div className="text-white font-jakarta font-extrabold text-base leading-tight">JAYDEV</div>
+                <div className="text-gold text-[10px] leading-tight tracking-widest uppercase">Multicomm Pvt. Ltd.</div>
+              </div>
+            </div>
+            <p className="text-white/60 text-sm leading-relaxed mb-5 max-w-xs">
+              Your single-source supply partner for industrial chemicals, minerals, solvents, acids, alkalis, water treatment chemicals &amp; specialty raw materials. IEC-registered, authorized partner of GACL &amp; Grasim, serving 100+ buyers across Africa, GCC &amp; SE Asia.
+            </p>
+            <div className="space-y-2.5 text-sm text-white/60">
+              <div className="flex items-start gap-2.5">
+                <Icon name="MapPin" className="w-4 h-4 mt-0.5 text-gold flex-shrink-0" />
+                <span>911 RK Supreme, 150 Ft Ring Road,<br />Rajkot, Gujarat – 360005</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Icon name="Mail" className="w-4 h-4 text-gold flex-shrink-0" />
+                <a href="mailto:sales@jaydevmulticomm.com" className="hover:text-gold-light transition-colors">
+                  sales@jaydevmulticomm.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <WaIcon className="w-4 h-4 text-green-400 flex-shrink-0" />
+                <a href="https://wa.me/919987539258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+                  +91 99875 39258
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <Icon name="Phone" className="w-4 h-4 text-gold flex-shrink-0" />
+                <a href="https://wa.me/919978479258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
+                  +91 99784 79258 (Office)
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Products */}
+          <div>
+            <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Products</h3>
+            <ul className="space-y-2">
+              {footerProducts.map((p) => (
+                <li key={p.href}>
+                  <Link href={p.href} className="text-white/55 text-sm hover:text-gold-light transition-colors">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Markets + Company */}
+          <div>
+            <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Markets</h3>
+            <ul className="space-y-2 mb-6">
+              {markets.map((m) => (
+                <li key={m.href}>
+                  <Link href={m.href} className="text-white/55 text-sm hover:text-gold-light transition-colors">
+                    {m.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Company</h3>
+            <ul className="space-y-2">
+              {company.map((c) => (
+                <li key={c.href}>
+                  <Link href={c.href} className="text-white/55 text-sm hover:text-gold-light transition-colors">
+                    {c.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick RFQ */}
+          <div>
+            <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Quick RFQ</h3>
+            <div className="bg-white/8 rounded-xl border border-white/10 p-4">
+              <p className="text-white/60 text-xs mb-4 leading-relaxed">
+                Send your requirement - product, quantity & destination port. We reply within 24 hours with a CIF quote.
+              </p>
+              <Link href="/quote" className="btn-gold text-xs w-full justify-center mb-2.5">
+                Get Quote Online
+              </Link>
+              <a
+                href="/Jaydev-Multicomm-Catalogue.pdf"
+                download
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-white/8 border border-white/15 text-white/80 text-xs font-medium hover:bg-white/15 transition-all mb-2.5"
+              >
+                <Icon name="Download" className="w-3.5 h-3.5" />
+                Download Catalogue
+              </a>
+              <a
+                href="https://wa.me/919987539258?text=Hi%2C%20I%20need%20a%20quote%20for%20industrial%20chemicals"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-all"
+              >
+                <WaIcon className="w-3.5 h-3.5" />
+                WhatsApp Us Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom strip */}
+        <div className="section-divider my-10" />
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap gap-2">
+            {['GACL Authorized Partner', 'Grasim Authorized Partner', 'IEC Registered'].map((badge) => (
+              <span key={badge} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/10 border border-gold/30 text-gold-light text-xs font-medium">
+                <Icon name="BadgeCheck" className="w-3.5 h-3.5" /> {badge}
+              </span>
+            ))}
+          </div>
+          <p className="text-white/35 text-xs text-center">
+            © {new Date().getFullYear()} Jaydev Multicomm Pvt. Ltd. · Rajkot, Gujarat, India
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
