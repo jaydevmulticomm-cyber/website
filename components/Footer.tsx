@@ -116,7 +116,7 @@ export default function Footer() {
             <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Quick RFQ</h3>
             <div className="bg-white/8 rounded-xl border border-white/10 p-4">
               <p className="text-white/60 text-xs mb-3 leading-relaxed">
-                Product, quantity &amp; destination port - we reply within 24 hours with a CIF quote.
+                Product, quantity &amp; destination port - we reply within 48 hours with a CIF quote.
               </p>
               <Link href="/quote" className="btn-gold text-xs w-full justify-center mb-2">
                 Get Quote Online

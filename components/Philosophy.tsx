@@ -38,23 +38,20 @@ const pillars = [
   {
     n: '01', tag: 'Philosophy', title: 'The Source', icon: 'Factory',
     lede: 'No intermediaries between the molecule and your manifest',
-    body: 'We draw direct from India’s foundational producers - GACL, Grasim, Reliance, IOCL, Tata Chemicals, Nirma & others. Every tonne is traced to its furnace.',
+    body: 'We draw direct from India’s foundational producers - GACL, Grasim, Reliance, IOCL, Tata Chemicals, Nirma & others. Best factory price, no middlemen, every tonne traced to its furnace.',
     metrics: [['Manufacturer-direct', 'GACL & Grasim authorized'], ['9', 'Foundational producers']],
-    points: ['Authorized partner of GACL & Grasim - best factory price, no middlemen', 'Single-source supply across acids, alkalis, minerals & specialty raw materials'],
   },
   {
     n: '02', tag: 'Craft', title: 'The Proof', icon: 'ShieldCheck',
     lede: 'Documentation is not paperwork. It is our signature',
-    body: 'Every batch carries its own certificate of truth - COA, MSDS, IMDG. Quality systems audited to ISO 9001, 14001 and 45001. Nothing ships unverified.',
+    body: 'Every batch ships with its own certificate of truth - COA, MSDS, BL, COO, Packing List & IMDG, as standard. Quality systems audited to ISO 9001, 14001 & 45001. Nothing ships unverified.',
     metrics: [['ISO 9001 · 14001 · 45001', 'Certified systems'], ['COA + MSDS', 'On every batch']],
-    points: ['COA, MSDS, BL, COO, Packing List & IMDG - included as standard, zero hassle', 'Every batch tested and verified before it ships'],
   },
   {
     n: '03', tag: 'Reach', title: 'The Reach', icon: 'Globe',
     lede: 'Chemistry in motion, across oceans',
-    body: 'From Mundra and JNPT to thirty nations - East Africa, the Gulf, Southeast Asia. FCL, fully documented, export-ready, on schedule, Consistently.',
+    body: 'From Mundra and JNPT to thirty nations - East Africa, the Gulf, Southeast Asia. Regular FCL & LCL, fully documented, export-ready and on schedule, consistently.',
     metrics: [['30+', 'Export markets'], ['5000+ MT', 'Moved monthly']],
-    points: ['Regular FCL & LCL shipments to East Africa, the GCC & Southeast Asia', 'Detailed CIF quote within 24 hours, guaranteed'],
   },
 ];
 
@@ -251,18 +248,6 @@ export default function Philosophy() {
                       </div>
                     ))}
                   </div>
-
-                  {/* supporting points - merged in from the old "Why Us" section */}
-                  {p.points && (
-                    <ul className="mt-7 space-y-2.5">
-                      {p.points.map((pt) => (
-                        <li key={pt} className="flex items-start gap-2.5 text-white/60 text-sm leading-snug max-w-md">
-                          <Icon name="Check" className="w-4 h-4 text-gold-light mt-0.5 flex-shrink-0" />
-                          {pt}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
 
                   {/* producer marquee - merged in from the old "Sourcing Ecosystem" section */}
                   {i === 0 && (

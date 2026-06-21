@@ -76,7 +76,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         {/* CTA */}
         <div className="bg-navy rounded-2xl p-8 text-center mt-10">
           <h3 className="font-jakarta text-xl font-extrabold text-white mb-2">Need a quote for these chemicals?</h3>
-          <p className="text-white/60 mb-5 text-sm">CIF/FOB pricing within 24 hours, full documentation included.</p>
+          <p className="text-white/60 mb-5 text-sm">CIF/FOB pricing within 48 hours, full documentation included.</p>
           <Link href="/quote" className="btn-gold px-7 py-3">Request a Quote <Icon name="ArrowRight" className="w-4 h-4" /></Link>
         </div>
       </div>

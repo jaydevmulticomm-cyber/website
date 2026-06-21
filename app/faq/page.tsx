@@ -40,7 +40,7 @@ export default function FaqPage() {
 
         <div className="bg-navy rounded-2xl p-8 text-center mt-10">
           <h2 className="font-jakarta text-xl font-extrabold text-white mb-2">Still have a question?</h2>
-          <p className="text-white/60 mb-5 text-sm">Our trade desk responds within 24 hours.</p>
+          <p className="text-white/60 mb-5 text-sm">Our trade desk responds within 48 hours.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/quote" className="btn-gold px-7 py-3">Request a Quote <Icon name="ArrowRight" className="w-4 h-4" /></Link>
             <a href="https://wa.me/919987539258" target="_blank" rel="noopener noreferrer" className="btn-ghost-white px-7 py-3">WhatsApp Us</a>

@@ -129,7 +129,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-navy rounded-2xl p-10 text-center">
           <h2 className="font-jakarta text-2xl font-extrabold text-white mb-3">Sourcing for {ind.name}?</h2>
-          <p className="text-white/60 mb-6">Get a CIF quote within 24 hours - full documentation included.</p>
+          <p className="text-white/60 mb-6">Get a CIF quote within 48 hours - full documentation included.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href={`/quote?industry=${ind.id}`} className="btn-gold px-8 py-3">Request a Quote</Link>
             <a href={`https://wa.me/919987539258?text=Hi%2C%20I%20need%20chemicals%20for%20the%20${encodeURIComponent(ind.name)}%20industry`} target="_blank" rel="noopener noreferrer" className="btn-ghost-white px-8 py-3">WhatsApp Us</a>

@@ -148,7 +148,7 @@ export default function ProductDetailClient({ product }: { product: Product }) {
             {/* RFQ Card */}
             <div className="card-white p-6 border-2 border-gold/30">
               <h3 className="font-jakarta font-bold text-navy text-lg mb-1">Request a Quote</h3>
-              <p className="text-gray-500 text-xs mb-5">Full CIF quote with COA &amp; documentation in 24 hours</p>
+              <p className="text-gray-500 text-xs mb-5">Full CIF quote with COA &amp; documentation in 48 hours</p>
               <Link href={`/quote?product=${product.id}`} className="btn-gold w-full justify-center text-sm">
                 Get CIF Quote Online <Icon name="ArrowRight" className="w-4 h-4" />
               </Link>

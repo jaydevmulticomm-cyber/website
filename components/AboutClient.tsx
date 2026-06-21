@@ -239,7 +239,7 @@ export default function AboutClient() {
         {/* CTA */}
         <div className="bg-navy rounded-2xl p-10 text-center">
           <h3 className="font-jakarta text-2xl font-extrabold text-white mb-3">Partner With Jaydev</h3>
-          <p className="text-white/60 mb-6">Export, import, or domestic supply - get a response within 24 hours.</p>
+          <p className="text-white/60 mb-6">Export, import, or domestic supply - get a response within 48 hours.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link href="/quote" className="btn-gold px-8 py-3">Request a Quote <Icon name="ArrowRight" className="w-4 h-4" /></Link>
             <a href="https://wa.me/919987539258" target="_blank" rel="noopener noreferrer" className="btn-ghost-white px-8 py-3">WhatsApp Us</a>
