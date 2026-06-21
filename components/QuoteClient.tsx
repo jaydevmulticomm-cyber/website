@@ -42,6 +42,28 @@ export default function QuoteClient() {
   const [step, setStep] = useState(0);
   const [dir, setDir] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
+
+  const submitQuote = async () => {
+    if (!stepValid(2) || sending) return;
+    setSending(true);
+    setSubmitError(false);
+    try {
+      const res = await fetch('/api/quote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error('request failed');
+      setSubmitted(true);
+    } catch {
+      // Email/API failed — surface a non-blocking error; WhatsApp stays available.
+      setSubmitError(true);
+    } finally {
+      setSending(false);
+    }
+  };
 
   useEffect(() => {
     const productId = searchParams.get('product');
@@ -283,14 +305,23 @@ export default function QuoteClient() {
                 ) : (
                   <button
                     type="button"
-                    onClick={() => stepValid(2) && setSubmitted(true)}
-                    disabled={!stepValid(2)}
+                    onClick={submitQuote}
+                    disabled={!stepValid(2) || sending}
                     className="btn-gold px-7 py-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0"
                   >
-                    Submit Request <Icon name="ArrowRight" className="w-4 h-4" />
+                    {sending ? 'Sending…' : <>Submit Request <Icon name="ArrowRight" className="w-4 h-4" /></>}
                   </button>
                 )}
               </div>
+
+              {submitError && (
+                <p className="mt-4 text-sm text-red-600">
+                  Couldn&apos;t send your request just now.{' '}
+                  <a href={`https://wa.me/919987539258?text=${waMessage}`} target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                    Send it on WhatsApp instead
+                  </a>{' '}or try again.
+                </p>
+              )}
             </div>
           </div>
 
