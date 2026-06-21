@@ -78,7 +78,7 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
     `position: sticky`). The bleeding disc is clipped by an inner `absolute inset-0 overflow-hidden`
     wrapper instead. Rail is `sticky top-1/2 -translate-y-1/2`; active pillar tracked by an
     IntersectionObserver with a centre-line `rootMargin: '-50% 0px -50% 0px'`.
-- **Featured carousel**: `components/FeaturedCarousel.tsx` — auto-scrolling CSS marquee
+- **Featured carousel**: `components/FeaturedCarousel.tsx` - auto-scrolling CSS marquee
   (`animate-jd-marquee`, pause on hover, `motion-reduce:animate-none`) of the 6 featured products.
   Sits BEFORE the Sourcing Ecosystem section. Uses `featuredImage()` (editorial art:
   `FEATURED_IMAGE` map in `lib/content.ts` → `/images/{causticsoda,sulphuricacid,pac,smbs,h2o2,
@@ -102,7 +102,7 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
 - **Claim honesty**: "Countries Served" → "Export Markets" everywhere (the "served" claim was
   flagged as overstated). "From Gujarat to 30+ countries" headline stays (reads as reach, not a
   served-count). Watch for "served" creeping back into stats/markets copy.
-- **Business Units ("Two Arms, One Standard") removed from home** — lives on the Group page only.
+- **Business Units ("Two Arms, One Standard") removed from home** - lives on the Group page only.
 - **Footer compressed**: grid is now 6-col on lg (brand span-2 + Products + Markets + Company + RFQ);
   Company moved beside Markets instead of stacked under it.
 - **Group page**: Jitesh filtered out of the Leadership & Team grid (he's the founder card up top,
@@ -112,7 +112,7 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
 - **Products page = Export/Import toggle** (`ProductsClient.tsx`): segmented control in the navy
   header switches `mode: 'export' | 'import'`. Export = full `products` catalog (search + category
   pills). Import = `IMPORT_PRODUCTS` (Zircon Sand, Lauric C12, Decanoic C10) with search, "Import"
-  badges, "Enquire to Import" CTA (no detail page — import items aren't in `products`). The old
+  badges, "Enquire to Import" CTA (no detail page - import items aren't in `products`). The old
   "Import Portfolio" grid was removed from the Group page (AboutClient) → replaced with a one-line
   callout linking to /products. `QuoteClient` now resolves import ids too (prefills name + adds an
   "Import enquiry (into India)" note). Products metadata updated for export+import.
@@ -129,7 +129,7 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
   **merged Trust band (Presence + Certifications on one navy section)** → Trade Terms → Final CTA.
   (Export Reach/TradeRouteMap section removed; Presence + Certifications merged for compression.)
 - **DELETED (unused, do not recreate)**: `HeroVisual.tsx`, `ScrollHero.tsx`, `TradeRouteMap.tsx`
-  and `public/world-land.json` + `public/world-countries.json` were removed in the cleanup pass —
+  and `public/world-land.json` + `public/world-countries.json` were removed in the cleanup pass -
   none were imported anymore. The hero is now the Philosophy section; there is no particle/map hero.
 - **History/why (do not regress):** A true WebGL R3F hero was attempted but `@react-three/fiber`
   threw `Cannot read properties of undefined (reading 'ReactCurrentOwner')` at runtime - a

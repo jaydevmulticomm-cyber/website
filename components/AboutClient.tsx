@@ -126,7 +126,7 @@ export default function AboutClient() {
           <div className="flex items-center gap-3">
             <Icon name="Anchor" className="w-6 h-6 text-gold flex-shrink-0" />
             <p className="text-navy-mid text-sm">
-              <strong className="text-navy">We also import into India</strong> — Zircon Sand, Lauric &amp; Decanoic Acid for domestic processors.
+              <strong className="text-navy">We also import into India</strong> - Zircon Sand, Lauric &amp; Decanoic Acid for domestic processors.
             </p>
           </div>
           <Link href="/products" className="btn-navy px-6 py-2.5 text-sm flex-shrink-0">

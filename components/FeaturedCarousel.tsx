@@ -7,7 +7,7 @@ const featured = products.filter((p) => p.featured).slice(0, 6);
 
 /**
  * Auto-scrolling featured-products carousel (seamless CSS marquee, pauses on
- * hover/touch-hold). Uses editorial `featuredImage()` art — product cards and
+ * hover/touch-hold). Uses editorial `featuredImage()` art - product cards and
  * detail pages keep their real product photo via `productImage()`.
  */
 export default function FeaturedCarousel() {

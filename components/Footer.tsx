@@ -49,7 +49,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-xs">
-              IEC-registered chemical exporter, authorized partner of GACL &amp; Grasim — serving Africa, the GCC &amp; Southeast Asia.
+              IEC-registered chemical exporter, authorized partner of GACL &amp; Grasim - serving Africa, the GCC &amp; Southeast Asia.
             </p>
             <div className="space-y-2 text-sm text-white/60">
               <div className="flex items-start gap-2.5">
@@ -116,28 +116,26 @@ export default function Footer() {
             <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Quick RFQ</h3>
             <div className="bg-white/8 rounded-xl border border-white/10 p-4">
               <p className="text-white/60 text-xs mb-3 leading-relaxed">
-                Product, quantity &amp; destination port — we reply within 24 hours with a CIF quote.
+                Product, quantity &amp; destination port - we reply within 24 hours with a CIF quote.
               </p>
               <Link href="/quote" className="btn-gold text-xs w-full justify-center mb-2">
                 Get Quote Online
               </Link>
-              <div className="flex gap-2">
-                <a
-                  href="/Jaydev-Multicomm-Catalogue.pdf"
-                  download
-                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-white/8 border border-white/15 text-white/80 text-xs font-medium hover:bg-white/15 transition-all"
-                >
-                  <Icon name="Download" className="w-3.5 h-3.5" /> Catalogue
-                </a>
-                <a
-                  href="https://wa.me/919987539258?text=Hi%2C%20I%20need%20a%20quote%20for%20industrial%20chemicals"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-all"
-                >
-                  <WaIcon className="w-3.5 h-3.5" /> WhatsApp
-                </a>
-              </div>
+              <a
+                href="/Jaydev-Multicomm-Catalogue.pdf"
+                download
+                className="flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-white/8 border border-white/15 text-white/80 text-xs font-medium hover:bg-white/15 transition-all mb-2"
+              >
+                <Icon name="Download" className="w-3.5 h-3.5" /> Download Catalogue
+              </a>
+              <a
+                href="https://wa.me/919987539258?text=Hi%2C%20I%20need%20a%20quote%20for%20industrial%20chemicals"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-all"
+              >
+                <WaIcon className="w-3.5 h-3.5" /> WhatsApp Us Now
+              </a>
             </div>
           </div>
         </div>

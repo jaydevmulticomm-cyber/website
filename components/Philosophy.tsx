@@ -40,14 +40,14 @@ const pillars = [
     lede: 'No intermediaries between the molecule and your manifest',
     body: 'We draw direct from India’s foundational producers - GACL, Grasim, Reliance, IOCL, Tata Chemicals, Nirma & others. Every tonne is traced to its furnace.',
     metrics: [['Manufacturer-direct', 'GACL & Grasim authorized'], ['9', 'Foundational producers']],
-    points: ['Authorized partner of GACL & Grasim — best factory price, no middlemen', 'Single-source supply across acids, alkalis, minerals & specialty raw materials'],
+    points: ['Authorized partner of GACL & Grasim - best factory price, no middlemen', 'Single-source supply across acids, alkalis, minerals & specialty raw materials'],
   },
   {
     n: '02', tag: 'Craft', title: 'The Proof', icon: 'ShieldCheck',
     lede: 'Documentation is not paperwork. It is our signature',
     body: 'Every batch carries its own certificate of truth - COA, MSDS, IMDG. Quality systems audited to ISO 9001, 14001 and 45001. Nothing ships unverified.',
     metrics: [['ISO 9001 · 14001 · 45001', 'Certified systems'], ['COA + MSDS', 'On every batch']],
-    points: ['COA, MSDS, BL, COO, Packing List & IMDG — included as standard, zero hassle', 'Every batch tested and verified before it ships'],
+    points: ['COA, MSDS, BL, COO, Packing List & IMDG - included as standard, zero hassle', 'Every batch tested and verified before it ships'],
   },
   {
     n: '03', tag: 'Reach', title: 'The Reach', icon: 'Globe',
@@ -66,7 +66,6 @@ export default function Philosophy() {
   const [verb, setVerb] = useState(0); // compact looping action-word sequence
 
   useEffect(() => {
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
     const id = setInterval(() => setVerb((v) => (v + 1) % VERBS.length), 1100);
     return () => clearInterval(id);
   }, []);
@@ -81,7 +80,7 @@ export default function Philosophy() {
           }
         });
       },
-      // zero-height band at the exact viewport centre — exactly one stacked
+      // zero-height band at the exact viewport centre - exactly one stacked
       // panel crosses it at a time, so the active index is always correct
       { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
     );
@@ -103,7 +102,7 @@ export default function Philosophy() {
       className="relative bg-[#0A1730] cursor-crosshair"
       style={{ background: 'linear-gradient(180deg,#0A1730 0%,#0A1730 70%,#0B1B38 100%)' }}
     >
-      {/* clip layer — holds the bleeding disc so the section itself has no overflow:hidden
+      {/* clip layer - holds the bleeding disc so the section itself has no overflow:hidden
           (which would break the sticky rail) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* monumental radial-spoke disc - cropped, bleeds beyond viewport, slow rotation */}
@@ -122,7 +121,7 @@ export default function Philosophy() {
                   'radial-gradient(circle, transparent 30%, #000 31%, #000 68%, transparent 71%)',
               }}
             />
-            {/* chemical product names written between the spokes — orbit with the disc */}
+            {/* chemical product names written between the spokes - orbit with the disc */}
             {DISC_NAMES.map((name, i) => {
               // spokes sit every 7.5° (conic gradient); +3.75° centres each name
               // in the middle of a wedge gap rather than on a spoke line
@@ -134,7 +133,7 @@ export default function Philosophy() {
                   className="absolute font-mono text-[11px] lg:text-sm uppercase tracking-[0.14em] text-gold-light/25 whitespace-nowrap"
                   style={{
                     // anchor each name's INNER edge at the same radius (16%) and let it
-                    // read outward along the spoke — so every name starts on the same line
+                    // read outward along the spoke - so every name starts on the same line
                     left: `${50 + Math.cos(rad) * 16}%`,
                     top: `${50 + Math.sin(rad) * 16}%`,
                     transformOrigin: '0 0',
@@ -165,7 +164,7 @@ export default function Philosophy() {
       )}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* compact looping action-word sequence — opens the page with motion */}
+        {/* compact looping action-word sequence - opens the page with motion */}
         <div className="pt-28 sm:pt-32 pb-8 flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-5 gap-y-2">
           {VERBS.map((v, i) => (
             <span key={v} className="flex items-center gap-3 sm:gap-5">
@@ -201,7 +200,7 @@ export default function Philosophy() {
                     </button>
                   </li>
                 ))}
-                {/* 4th point — the finale */}
+                {/* 4th point - the finale */}
                 <li>
                   <button
                     onClick={() => panelRefs.current[3]?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
@@ -253,7 +252,7 @@ export default function Philosophy() {
                     ))}
                   </div>
 
-                  {/* supporting points — merged in from the old "Why Us" section */}
+                  {/* supporting points - merged in from the old "Why Us" section */}
                   {p.points && (
                     <ul className="mt-7 space-y-2.5">
                       {p.points.map((pt) => (
@@ -265,7 +264,7 @@ export default function Philosophy() {
                     </ul>
                   )}
 
-                  {/* producer marquee — merged in from the old "Sourcing Ecosystem" section */}
+                  {/* producer marquee - merged in from the old "Sourcing Ecosystem" section */}
                   {i === 0 && (
                     <div className="mt-11 max-w-xl">
                       <div className="text-[10px] uppercase tracking-[0.28em] text-white/30 mb-3">Backed by India&apos;s leading producers</div>
@@ -285,7 +284,7 @@ export default function Philosophy() {
               </div>
             ))}
 
-            {/* ── 04 · Finale — the journey resolves: from Gujarat to the world ── */}
+            {/* ── 04 · Finale - the journey resolves: from Gujarat to the world ── */}
             <div
               ref={(el) => { panelRefs.current[3] = el; }}
               className="min-h-[72vh] sm:min-h-[88vh] flex flex-col justify-center py-12 sm:py-16"

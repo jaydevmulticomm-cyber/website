@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import SocialRail from '@/components/SocialRail';
 import SmoothScroll from '@/components/SmoothScroll';
+import MobileNav from '@/components/MobileNav';
 
 export const metadata: Metadata = {
   title: {
@@ -87,9 +88,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        {/* spacer so the floating mobile tray never covers footer content */}
+        <div className="h-20 lg:hidden" aria-hidden="true" />
         <SmoothScroll />
         <SocialRail />
         <FloatingWhatsApp />
+        <MobileNav />
       </body>
     </html>
   );

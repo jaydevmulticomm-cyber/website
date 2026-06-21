@@ -4,7 +4,7 @@ import {
   Gem, Ship, Building2, Factory, Package, ShieldCheck, Truck, Clock, FileText,
   MessageCircle, Phone, Mail, MapPin, Search, ArrowRight, Check, ChevronRight,
   Menu, X, Anchor, Boxes, BadgeCheck, Headset, Handshake, Container,
-  Download, FileDown, ChevronDown,
+  Download, FileDown, ChevronDown, Home,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -14,7 +14,7 @@ const MAP: Record<string, LucideIcon> = {
   Gem, Ship, Building2, Factory, Package, ShieldCheck, Truck, Clock, FileText,
   MessageCircle, Phone, Mail, MapPin, Search, ArrowRight, Check, ChevronRight,
   Menu, X, Anchor, Boxes, BadgeCheck, Headset, Handshake, Container,
-  Download, FileDown, ChevronDown,
+  Download, FileDown, ChevronDown, Home,
 };
 
 export function Icon({ name, className = 'w-5 h-5', strokeWidth = 1.75 }: { name: string; className?: string; strokeWidth?: number }) {

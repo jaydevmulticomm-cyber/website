@@ -59,7 +59,7 @@ export default function ProductsClient() {
           </h1>
           <p className="text-white/65 max-w-2xl mx-auto text-lg">
             {mode === 'export'
-              ? 'Manufacturer-direct industrial chemicals shipped worldwide — full COA, MSDS & export documentation on every product.'
+              ? 'Manufacturer-direct industrial chemicals shipped worldwide - full COA, MSDS & export documentation on every product.'
               : 'Select raw materials Jaydev Multicomm sources into India for domestic ceramic, oleochemical & specialty processors.'}
           </p>
 
@@ -266,7 +266,7 @@ export default function ProductsClient() {
             {importFiltered.length === 0 && (
               <div className="text-center py-20">
                 <Icon name="Search" className="w-10 h-10 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500">No imports match. We also source materials on request — ask us.</p>
+                <p className="text-gray-500">No imports match. We also source materials on request - ask us.</p>
               </div>
             )}
           </>

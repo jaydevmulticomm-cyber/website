@@ -35,7 +35,7 @@ export default function MarketsClient() {
         {/* Detailed market cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {marketData.map(market => (
-            <div key={market.id} id={market.id} className="card-white rounded-2xl overflow-hidden scroll-mt-24 flex flex-col h-full">
+            <div key={market.id} id={market.id} className="card-white rounded-2xl overflow-hidden scroll-mt-24 flex flex-col h-full lg:grid lg:grid-rows-subgrid lg:row-span-5 lg:gap-y-0">
               {/* Card header */}
               <div className="bg-navy p-6 relative overflow-hidden">
                 <Icon name="Globe" className="absolute -top-4 -right-4 w-28 h-28 text-white/5 pointer-events-none" strokeWidth={1} />

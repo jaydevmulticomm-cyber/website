@@ -42,7 +42,7 @@ export default function HomeClient() {
 
       {/* Sourcing Ecosystem marquee merged into the Philosophy "The Source" pillar */}
 
-      {/* Business Units ("Two Arms, One Standard") removed from home — lives on the Group page only */}
+      {/* Business Units ("Two Arms, One Standard") removed from home - lives on the Group page only */}
 
       {/* ═══ PROCESS FLOW ═══ */}
       <section className="py-14 bg-white">
@@ -151,14 +151,14 @@ export default function HomeClient() {
         </div>
       </section>
 
-      {/* ═══ TRUST BAND — Presence + Certifications (merged) ═══ */}
+      {/* ═══ TRUST BAND - Presence + Certifications (merged) ═══ */}
       <section className="py-12 bg-navy border-y border-navy-mid">
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           {/* Presence */}
           <div className="flex flex-col lg:flex-row lg:items-center gap-6">
             <div className="lg:w-60 flex-shrink-0">
               <span className="section-label mb-2">Our Presence</span>
-              <p className="text-white/55 text-sm leading-relaxed">Offices across India &amp; Nigeria — shipping worldwide.</p>
+              <p className="text-white/55 text-sm leading-relaxed">Offices across India &amp; Nigeria - shipping worldwide.</p>
             </div>
             <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-3">
               {BRANCHES.map(b => (
