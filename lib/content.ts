@@ -58,6 +58,16 @@ export const COMPANY = {
 };
 
 // ─── Jaydev Group structure ───────────────────
+// ─── Certifications & registrations (verifiable proof) ──
+export const CERTIFICATIONS = [
+  { code: 'ISO 9001:2015', label: 'Quality Management' },
+  { code: 'ISO 14001:2015', label: 'Environmental Management' },
+  { code: 'ISO 45001:2018', label: 'Occupational Health & Safety' },
+  { code: 'IEC Registered', label: 'Import-Export Code' },
+  { code: 'GST', label: 'Registered Enterprise' },
+  { code: 'RCMC', label: 'Export Promotion Council' },
+];
+
 export const GROUP = {
   name: 'Jaydev Group',
   founder: 'Jitesh Vajir',
@@ -67,7 +77,7 @@ export const GROUP = {
   hq: 'Rajkot, Gujarat, India',
   established: '2018',
   description:
-    'Jaydev Group is a Rajkot-headquartered chemical enterprise founded by Jitesh Vajir, operating across domestic distribution and global trade through two specialised business units, backed by direct manufacturer relationships with India\'s leading producers.',
+    'Jaydev Group is a Rajkot-headquartered chemical enterprise backed by direct manufacturer relationships with India\'s leading producers',
 };
 
 export type Branch = { city: string; country: string; role: string; lat: number; lng: number; hq?: boolean };
@@ -225,6 +235,19 @@ export const CATEGORY_IMAGE: Record<string, string> = {
 // Resolve the best image for any product: specific → category → generic bags.
 export const productImage = (p: { id: string; category: string }) =>
   IMAGE_MAP[p.id] ?? CATEGORY_IMAGE[p.category] ?? '/images/bags.png';
+
+// Dedicated editorial imagery for the home Featured carousel ONLY.
+// Product cards / detail pages keep their real product image via productImage().
+export const FEATURED_IMAGE: Record<string, string> = {
+  'caustic-soda': '/images/causticsoda.webp',
+  'sulphuric-acid': '/images/sulphuricacid.webp',
+  'pac': '/images/pac.webp',
+  'smbs': '/images/smbs.webp',
+  'hydrogen-peroxide': '/images/h2o2.webp',
+  'calcium-chloride': '/images/calciumchloride.webp',
+};
+export const featuredImage = (p: { id: string; category: string }) =>
+  FEATURED_IMAGE[p.id] ?? productImage(p);
 
 // ─── Industry image mapping (all industries covered) ──
 export const INDUSTRY_IMAGE_MAP: Record<string, string> = {

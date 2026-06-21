@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import SocialRail from '@/components/SocialRail';
+import SmoothScroll from '@/components/SmoothScroll';
 
 export const metadata: Metadata = {
   title: {
@@ -19,12 +20,14 @@ export const metadata: Metadata = {
     url: 'https://www.jaydevmulticomm.com',
     siteName: 'Jaydev Multicomm Pvt. Ltd.',
     title: 'Jaydev Multicomm - Global Industrial Chemical Supply',
-    description: 'IEC-registered chemical exporter from India. 25+ products, 100+ global buyers, GACL & Grasim Authorized Partner.',
+    description: 'IEC-registered chemical exporter from India. 100+ products, 100+ global buyers, GACL & Grasim Authorized Partner.',
+    images: [{ url: '/brand/logo.png', width: 800, height: 800, alt: 'Jaydev Multicomm' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Jaydev Multicomm Pvt. Ltd.',
     description: 'Industrial chemical exporter from Rajkot, India. GACL & Grasim Authorized Partner.',
+    images: ['/brand/logo.png'],
   },
 };
 
@@ -84,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <SmoothScroll />
         <SocialRail />
         <FloatingWhatsApp />
       </body>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Icon } from './Icon';
-import { COMPANY, GROUP, BUSINESS_UNITS, BRANCHES, IMPORT_PRODUCTS } from '@/lib/content';
+import { COMPANY, GROUP, BUSINESS_UNITS, BRANCHES } from '@/lib/content';
 
 const capabilities = [
   { label: 'Product Range', value: '100+ industrial chemicals' },
@@ -49,11 +49,21 @@ export default function AboutClient() {
           {/* Founder card */}
           <div className="card-white p-8 flex flex-col items-center text-center justify-center">
             <div className="relative w-24 h-24 rounded-full overflow-hidden ring-4 ring-gold/30 mb-4">
-              <Image src={GROUP.founderImage} alt={GROUP.founder} fill className="object-cover" />
+              <Image src={GROUP.founderImage} alt={GROUP.founder} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover" />
             </div>
             <h3 className="font-jakarta font-bold text-navy text-lg">{GROUP.founder}</h3>
             <p className="text-gold font-semibold text-sm mb-3">{GROUP.founderTitle}</p>
-            <p className="text-gray-500 text-sm leading-relaxed">Founder of the Jaydev Group, driving its growth across domestic distribution and global chemical trade.</p>
+            <p className="text-gray-500 text-sm leading-relaxed mb-4">Founder of the Jaydev Group, driving its growth across domestic distribution and global chemical trade.</p>
+            <a
+              href="https://www.linkedin.com/in/jitesh-vajir-2471993b6/"
+              target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-[#0A66C2] transition-colors font-medium"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+              Connect on LinkedIn
+            </a>
           </div>
         </div>
 
@@ -64,11 +74,11 @@ export default function AboutClient() {
             <span className="section-label mb-4">Founder&apos;s Message</span>
             <svg viewBox="0 0 24 24" className="w-10 h-10 text-gold/40 mb-4" fill="currentColor"><path d="M9.5 7A4.5 4.5 0 005 11.5V17h5.5v-5.5H7.5A2 2 0 019.5 9.5V7zm9 0A4.5 4.5 0 0014 11.5V17h5.5v-5.5h-3A2 2 0 0118.5 9.5V7z"/></svg>
             <p className="text-white/90 text-lg md:text-xl leading-relaxed font-jakarta max-w-3xl">
-              &ldquo;We started Jaydev with one belief - that global buyers deserve a partner who is reliable, transparent, and accountable on every single shipment. We don&apos;t just trade chemicals; we stand behind the quality, the documentation, and the timeline. That is the promise behind the Jaydev name, and it is one I hold the whole team to every day.&rdquo;
+              &ldquo;Most chemical buyers have been let down once - a wrong grade, a missing document, a shipment that slipped. I built Jaydev so that doesn&apos;t happen on our watch. Every order is matched to the right manufacturer, ships with complete documentation, and is tracked to your port. That accountability is the whole company.&rdquo;
             </p>
             <div className="flex items-center gap-4 mt-7">
               <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-gold/40 flex-shrink-0">
-                <Image src={GROUP.founderImage} alt={GROUP.founder} fill className="object-cover" />
+                <Image src={GROUP.founderImage} alt={GROUP.founder} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover" />
               </div>
               <div>
                 <div className="text-white font-jakarta font-bold">{GROUP.founder}</div>
@@ -111,37 +121,17 @@ export default function AboutClient() {
           </div>
         </div>
 
-        {/* Import Portfolio */}
-        <div>
-          <div className="flex items-center gap-3 mb-6">
-            <Icon name="Ship" className="w-6 h-6 text-gold" />
-            <h2 className="font-jakarta text-2xl font-extrabold text-navy">Import Portfolio</h2>
+        {/* Import Portfolio moved to the Products page (Export / Import toggle) */}
+        <div className="card-white rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
+          <div className="flex items-center gap-3">
+            <Icon name="Anchor" className="w-6 h-6 text-gold flex-shrink-0" />
+            <p className="text-navy-mid text-sm">
+              <strong className="text-navy">We also import into India</strong> — Zircon Sand, Lauric &amp; Decanoic Acid for domestic processors.
+            </p>
           </div>
-          <p className="text-gray-500 mb-6 max-w-2xl">Beyond exports, Jaydev Multicomm imports select raw materials into India to serve domestic ceramic, oleochemical, and specialty processors.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {IMPORT_PRODUCTS.map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="card-white p-6"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gold-bg flex items-center justify-center mb-4">
-                  <Icon name={p.icon} className="w-6 h-6 text-gold-dark" strokeWidth={1.6} />
-                </div>
-                <div className="flex items-baseline gap-2 mb-1">
-                  <h3 className="font-jakarta font-bold text-navy">{p.name}</h3>
-                  {p.formula && <span className="text-gold text-xs font-mono">{p.formula}</span>}
-                </div>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{p.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.applications.slice(0, 4).map(a => (
-                    <span key={a} className="text-[11px] px-2 py-0.5 rounded bg-navy-pale text-navy-mid font-medium">{a}</span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <Link href="/products" className="btn-navy px-6 py-2.5 text-sm flex-shrink-0">
+            View Imports <Icon name="ArrowRight" className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* Capabilities */}
@@ -199,12 +189,12 @@ export default function AboutClient() {
         {/* Team */}
         <div>
           <h2 className="font-jakarta text-2xl font-extrabold text-navy mb-6">Leadership & Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {COMPANY.team.map((member, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
+            {COMPANY.team.filter((m) => m.name !== GROUP.founder).map((member, i) => (
               <div key={i} className="card-white p-6 text-center">
                 {member.image ? (
                   <div className="relative w-20 h-20 rounded-full overflow-hidden ring-4 ring-gold/30 mx-auto mb-4">
-                    <Image src={member.image} alt={member.name} fill className="object-cover" />
+                    <Image src={member.image} alt={member.name} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover" />
                   </div>
                 ) : (
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold to-gold-light mx-auto mb-4 flex items-center justify-center text-navy font-extrabold text-xl font-jakarta">

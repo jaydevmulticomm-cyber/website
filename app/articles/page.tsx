@@ -32,7 +32,7 @@ export default function ArticlesPage() {
         {/* Lead article */}
         <Link href={`/articles/${lead.slug}`} className="card-white rounded-2xl overflow-hidden grid md:grid-cols-2 mb-10 group">
           <div className="relative h-64 md:h-auto bg-navy-pale">
-            <Image src={lead.image} alt={lead.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+            <Image src={lead.image} alt={lead.title} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="p-8 flex flex-col justify-center">
             <div className="flex items-center gap-3 mb-3 text-xs">
@@ -52,7 +52,7 @@ export default function ArticlesPage() {
           {rest.map((a) => (
             <Link key={a.slug} href={`/articles/${a.slug}`} className="card-white rounded-2xl overflow-hidden flex flex-col group">
               <div className="relative h-44 bg-navy-pale">
-                <Image src={a.image} alt={a.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={a.image} alt={a.title} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <div className="flex items-center gap-2 mb-2 text-xs">

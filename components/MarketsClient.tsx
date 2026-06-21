@@ -13,7 +13,7 @@ export default function MarketsClient() {
           <span className="section-label mb-3">Export Markets</span>
           <h1 className="font-jakarta text-4xl sm:text-5xl font-extrabold text-white mb-4">Our Global Markets</h1>
           <p className="text-white/65 max-w-xl mx-auto text-lg">
-            Regular LCL & FCL shipments to 4 major trade regions. Competitive CIF/FOB pricing with complete export documentation.
+            Regular FCL shipments to 4 major trade regions. Competitive CIF/FOB pricing with complete export documentation.
           </p>
         </div>
       </div>
@@ -53,7 +53,7 @@ export default function MarketsClient() {
                 <p className="text-white/65 text-sm leading-relaxed mt-3 min-h-[2.75rem]">{market.description}</p>
               </div>
 
-              <div className="p-6 grid grid-cols-2 gap-6 min-h-[17.5rem] content-start">
+              <div className="p-6 grid grid-cols-2 gap-6 content-start">
                 <div>
                   <h3 className="text-gray-400 text-xs uppercase tracking-wider font-bold mb-3">Countries</h3>
                   <div className="space-y-1.5">
@@ -80,7 +80,7 @@ export default function MarketsClient() {
 
               <div className="px-6 pb-2">
                 <h3 className="text-gray-400 text-xs uppercase tracking-wider font-bold mb-3">High-Demand Products</h3>
-                <div className="flex flex-wrap gap-2 mb-5 min-h-[3.5rem] content-start">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {market.keyProducts.map(p => (
                     <span key={p} className="text-xs px-3 py-1 rounded-full bg-gold-bg border border-gold/30 text-gold-dark font-semibold h-fit">{p}</span>
                   ))}

@@ -36,43 +36,35 @@ const company = [
 export default function Footer() {
   return (
     <footer className="bg-navy border-t border-navy-mid">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-8">
 
           {/* Brand + Contact */}
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
+          <div className="col-span-2 md:col-span-3 lg:col-span-2">
+            <div className="flex items-center gap-3 mb-3">
               <MoleculeMark className="w-10 h-10 flex-shrink-0" />
               <div>
                 <div className="text-white font-jakarta font-extrabold text-base leading-tight">JAYDEV</div>
                 <div className="text-gold text-[10px] leading-tight tracking-widest uppercase">Multicomm Pvt. Ltd.</div>
               </div>
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-5 max-w-xs">
-              Your single-source supply partner for industrial chemicals, minerals, solvents, acids, alkalis, water treatment chemicals &amp; specialty raw materials. IEC-registered, authorized partner of GACL &amp; Grasim, serving 100+ buyers across Africa, GCC &amp; SE Asia.
+            <p className="text-white/60 text-sm leading-relaxed mb-4 max-w-xs">
+              IEC-registered chemical exporter, authorized partner of GACL &amp; Grasim — serving Africa, the GCC &amp; Southeast Asia.
             </p>
-            <div className="space-y-2.5 text-sm text-white/60">
+            <div className="space-y-2 text-sm text-white/60">
               <div className="flex items-start gap-2.5">
                 <Icon name="MapPin" className="w-4 h-4 mt-0.5 text-gold flex-shrink-0" />
-                <span>911 RK Supreme, 150 Ft Ring Road,<br />Rajkot, Gujarat – 360005</span>
+                <span>911 RK Supreme, 150 Ft Ring Road, Rajkot, Gujarat – 360005</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Icon name="Mail" className="w-4 h-4 text-gold flex-shrink-0" />
-                <a href="mailto:sales@jaydevmulticomm.com" className="hover:text-gold-light transition-colors">
-                  sales@jaydevmulticomm.com
-                </a>
+                <a href="mailto:sales@jaydevmulticomm.com" className="hover:text-gold-light transition-colors">sales@jaydevmulticomm.com</a>
               </div>
               <div className="flex items-center gap-2.5">
                 <WaIcon className="w-4 h-4 text-green-400 flex-shrink-0" />
-                <a href="https://wa.me/919987539258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
-                  +91 99875 39258
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Icon name="Phone" className="w-4 h-4 text-gold flex-shrink-0" />
-                <a href="https://wa.me/919978479258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">
-                  +91 99784 79258 (Office)
-                </a>
+                <a href="https://wa.me/919987539258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">+91 99875 39258</a>
+                <span className="text-white/30">·</span>
+                <a href="https://wa.me/919978479258" target="_blank" rel="noopener noreferrer" className="hover:text-green-400 transition-colors">99784 79258 (Office)</a>
               </div>
             </div>
           </div>
@@ -91,10 +83,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Markets + Company */}
+          {/* Markets */}
           <div>
             <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Markets</h3>
-            <ul className="space-y-2 mb-6">
+            <ul className="space-y-2">
               {markets.map((m) => (
                 <li key={m.href}>
                   <Link href={m.href} className="text-white/55 text-sm hover:text-gold-light transition-colors">
@@ -103,6 +95,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
+          </div>
+
+          {/* Company */}
+          <div>
             <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Company</h3>
             <ul className="space-y-2">
               {company.map((c) => (
@@ -119,35 +115,35 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-jakarta font-semibold text-xs uppercase tracking-wider mb-4">Quick RFQ</h3>
             <div className="bg-white/8 rounded-xl border border-white/10 p-4">
-              <p className="text-white/60 text-xs mb-4 leading-relaxed">
-                Send your requirement - product, quantity & destination port. We reply within 24 hours with a CIF quote.
+              <p className="text-white/60 text-xs mb-3 leading-relaxed">
+                Product, quantity &amp; destination port — we reply within 24 hours with a CIF quote.
               </p>
-              <Link href="/quote" className="btn-gold text-xs w-full justify-center mb-2.5">
+              <Link href="/quote" className="btn-gold text-xs w-full justify-center mb-2">
                 Get Quote Online
               </Link>
-              <a
-                href="/Jaydev-Multicomm-Catalogue.pdf"
-                download
-                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-white/8 border border-white/15 text-white/80 text-xs font-medium hover:bg-white/15 transition-all mb-2.5"
-              >
-                <Icon name="Download" className="w-3.5 h-3.5" />
-                Download Catalogue
-              </a>
-              <a
-                href="https://wa.me/919987539258?text=Hi%2C%20I%20need%20a%20quote%20for%20industrial%20chemicals"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-all"
-              >
-                <WaIcon className="w-3.5 h-3.5" />
-                WhatsApp Us Now
-              </a>
+              <div className="flex gap-2">
+                <a
+                  href="/Jaydev-Multicomm-Catalogue.pdf"
+                  download
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-white/8 border border-white/15 text-white/80 text-xs font-medium hover:bg-white/15 transition-all"
+                >
+                  <Icon name="Download" className="w-3.5 h-3.5" /> Catalogue
+                </a>
+                <a
+                  href="https://wa.me/919987539258?text=Hi%2C%20I%20need%20a%20quote%20for%20industrial%20chemicals"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 text-xs font-medium hover:bg-green-500/20 transition-all"
+                >
+                  <WaIcon className="w-3.5 h-3.5" /> WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Bottom strip */}
-        <div className="section-divider my-10" />
+        <div className="section-divider my-6" />
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap gap-2">
             {['GACL Authorized Partner', 'Grasim Authorized Partner', 'IEC Registered'].map((badge) => (

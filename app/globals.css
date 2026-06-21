@@ -209,3 +209,8 @@ textarea:focus-visible {
     color: var(--gold);
   }
 }
+
+/* Marquee (logo strip) */
+@keyframes jd-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.animate-jd-marquee { animation: jd-marquee 28s linear infinite; }
+.marquee-mask { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }

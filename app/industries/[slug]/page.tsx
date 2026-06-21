@@ -49,7 +49,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       {/* Hero */}
       <div className="relative bg-navy overflow-hidden">
-        {img && <Image src={img} alt={ind.name} fill className="object-cover opacity-25" priority />}
+        {img && <Image src={img} alt={ind.name} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover opacity-25" priority />}
         <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/85 to-navy/40" />
         <div className="relative max-w-7xl mx-auto px-4 py-16">
           <nav className="flex items-center gap-2 text-sm text-white/50 mb-6">

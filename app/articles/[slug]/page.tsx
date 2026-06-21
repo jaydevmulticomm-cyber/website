@@ -45,7 +45,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className="relative bg-navy">
-        <Image src={a.image} alt={a.title} fill className="object-cover opacity-20" priority />
+        <Image src={a.image} alt={a.title} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover opacity-20" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/85 to-navy/60" />
         <div className="relative max-w-3xl mx-auto px-4 py-16">
           <nav className="flex items-center gap-2 text-sm text-white/50 mb-6">
@@ -88,7 +88,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           {related.map((r) => (
             <Link key={r.slug} href={`/articles/${r.slug}`} className="card-white rounded-2xl overflow-hidden flex flex-col group">
               <div className="relative h-40 bg-navy-pale">
-                <Image src={r.image} alt={r.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                <Image src={r.image} alt={r.title} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-5">
                 <span className="text-xs px-2 py-0.5 rounded-full bg-gold-bg text-gold-dark font-semibold">{r.category}</span>

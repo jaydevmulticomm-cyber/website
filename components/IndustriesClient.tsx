@@ -66,7 +66,7 @@ export default function IndustriesClient() {
               >
                 {/* Banner */}
                 <div className="relative h-44 bg-navy">
-                  {img && <Image src={img} alt={industry.name} fill className="object-cover opacity-30" />}
+                  {img && <Image src={img} alt={industry.name} fill sizes="(max-width:768px) 100vw, 420px" className="object-cover opacity-30" />}
                   <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/70 to-transparent" />
                   <div className="absolute inset-0 p-6 md:p-8 flex items-end">
                     <div>

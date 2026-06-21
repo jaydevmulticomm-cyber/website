@@ -1,20 +1,16 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { products, industryData, marketData } from '@/lib/content';
+import { AnimatePresence, motion } from 'framer-motion';
+import { products, industryData, marketData, IMPORT_PRODUCTS } from '@/lib/content';
 import { Icon } from './Icon';
 
 const popularProducts = [
-  'Caustic Soda Flakes',
-  'Sulphuric Acid',
-  'PAC – Poly Aluminium Chloride',
-  'SMBS – Sodium Metabisulphite',
-  'Hydrogen Peroxide',
-  'Calcium Chloride',
+  'Caustic Soda (NaOH)', 'Sulphuric Acid', 'PAC – Poly Aluminium Chloride',
+  'SMBS – Sodium Metabisulphite', 'Hydrogen Peroxide', 'Calcium Chloride',
 ];
-
 const incoterms = ['CIF', 'FOB', 'CFR', 'EXW'];
 const units = ['MT', 'KG', 'Liters', 'Drums', 'FCL'];
 
@@ -25,28 +21,26 @@ const WaIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
 );
 
 interface FormData {
-  product: string;
-  quantity: string;
-  unit: string;
-  destinationPort: string;
-  incoterm: string;
-  packaging: string;
-  name: string;
-  company: string;
-  email: string;
-  phone: string;
-  country: string;
-  notes: string;
+  product: string; quantity: string; unit: string; destinationPort: string;
+  incoterm: string; packaging: string; name: string; company: string;
+  email: string; phone: string; country: string; notes: string;
 }
-
 const defaultForm: FormData = {
   product: '', quantity: '', unit: 'MT', destinationPort: '', incoterm: 'CIF',
   packaging: '', name: '', company: '', email: '', phone: '', country: '', notes: '',
 };
 
+const steps = [
+  { title: 'Product', icon: 'FlaskConical' },
+  { title: 'Shipping', icon: 'Ship' },
+  { title: 'Your Details', icon: 'Handshake' },
+];
+
 export default function QuoteClient() {
   const searchParams = useSearchParams();
   const [form, setForm] = useState<FormData>(defaultForm);
+  const [step, setStep] = useState(0);
+  const [dir, setDir] = useState(1);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
@@ -56,37 +50,33 @@ export default function QuoteClient() {
     setForm(f => {
       const next = { ...f };
       if (productId) {
-        const found = products.find(p => p.id === productId);
-        if (found) next.product = found.name;
+        const p = products.find(x => x.id === productId);
+        const imp = IMPORT_PRODUCTS.find(x => x.id === productId);
+        if (p) next.product = p.name;
+        else if (imp) { next.product = imp.name; next.notes = `Import enquiry (into India).${next.notes ? ' ' + next.notes : ''}`; }
       }
-      if (industryId) {
-        const ind = industryData.find(i => i.id === industryId);
-        if (ind) next.notes = `Enquiry for the ${ind.name} industry.${next.notes ? ' ' + next.notes : ''}`;
-      }
-      if (marketId) {
-        const mkt = marketData.find(m => m.id === marketId);
-        if (mkt) {
-          next.country = next.country || mkt.name;
-          next.notes = `Shipping to ${mkt.name}.${next.notes ? ' ' + next.notes : ''}`;
-        }
-      }
+      if (industryId) { const i = industryData.find(x => x.id === industryId); if (i) next.notes = `Enquiry for the ${i.name} industry.${next.notes ? ' ' + next.notes : ''}`; }
+      if (marketId) { const m = marketData.find(x => x.id === marketId); if (m) { next.country = next.country || m.name; next.notes = `Shipping to ${m.name}.${next.notes ? ' ' + next.notes : ''}`; } }
       return next;
     });
   }, [searchParams]);
 
   const waMessage = encodeURIComponent(
-    `Hi, I need a ${form.incoterm} quote for:\n\nProduct: ${form.product || 'TBD'}\nQty: ${form.quantity} ${form.unit}\nDestination: ${form.destinationPort}\nIncoterm: ${form.incoterm}\n\nContact: ${form.name}, ${form.company}, ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nNotes: ${form.notes || 'None'}`
+    `Hi, I need a ${form.incoterm} quote for:\n\nProduct: ${form.product || 'TBD'}\nQty: ${form.quantity} ${form.unit}\nDestination: ${form.destinationPort}\nIncoterm: ${form.incoterm}\nPackaging: ${form.packaging || 'Std'}\n\nContact: ${form.name}, ${form.company}, ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nNotes: ${form.notes || 'None'}`
   );
 
   const set = (key: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm(f => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
+  const stepValid = (s: number) => {
+    if (s === 0) return form.product.trim() !== '' && form.quantity.trim() !== '';
+    if (s === 1) return form.destinationPort.trim() !== '';
+    if (s === 2) return form.name.trim() !== '' && /\S+@\S+\.\S+/.test(form.email);
+    return true;
   };
 
-  // Input & label styles
+  const go = (d: number) => { setDir(d); setStep(s => Math.min(2, Math.max(0, s + d))); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
   const inputClass = "w-full px-4 py-3 rounded-xl bg-white border border-[#E5E7EB] text-gray-900 placeholder-gray-400 text-sm focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all shadow-sm";
   const labelClass = "block text-gray-700 text-xs font-semibold mb-1.5";
 
@@ -98,15 +88,10 @@ export default function QuoteClient() {
             <Icon name="Check" className="w-10 h-10 text-green-600" strokeWidth={2.5} />
           </div>
           <h1 className="font-jakarta text-2xl font-extrabold text-navy mb-3">Quote Request Received!</h1>
-          <p className="text-gray-500 mb-8">We&apos;ll respond within 24 hours with a detailed CIF quote. For faster response, reach us on WhatsApp.</p>
-          <a
-            href={`https://wa.me/919987539258?text=${waMessage}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-green-50 border border-green-200 text-green-700 font-semibold mb-4 hover:bg-green-100 transition-all"
-          >
-            <WaIcon className="w-5 h-5" />
-            Follow Up on WhatsApp
+          <p className="text-gray-500 mb-8">We&apos;ll respond within 24 hours with a detailed quote. For a faster response, reach us on WhatsApp.</p>
+          <a href={`https://wa.me/919987539258?text=${waMessage}`} target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-xl bg-green-50 border border-green-200 text-green-700 font-semibold mb-4 hover:bg-green-100 transition-all">
+            <WaIcon className="w-5 h-5" /> Follow Up on WhatsApp
           </a>
           <Link href="/" className="text-gray-400 text-sm hover:text-navy transition-colors">← Back to Home</Link>
         </div>
@@ -114,167 +99,228 @@ export default function QuoteClient() {
     );
   }
 
+  const variants = {
+    enter: (d: number) => ({ opacity: 0, x: d * 40 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d * -40 }),
+  };
+
   return (
     <div className="min-h-screen bg-white pt-20 pb-20">
-      {/* Header */}
       <div className="bg-navy py-12">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <span className="section-label mb-3">Get Quote</span>
-          <h1 className="font-jakarta text-4xl font-extrabold text-white mb-3">Request a CIF Quote</h1>
-          <p className="text-white/65">Fill in your requirements - we respond with a detailed quote within 24 hours.</p>
+          <h1 className="font-jakarta text-4xl font-extrabold text-white mb-3">Request a Quote in 3 Steps</h1>
+          <p className="text-white/65">Tell us what you need - a detailed CIF/FOB quote follows within 24 hours.</p>
         </div>
       </div>
 
       <div className="max-w-6xl mx-auto px-4 pt-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-          {/* ── FORM ── */}
-          <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-6">
-
-            {/* Product Requirements */}
-            <div className="card-white p-6 rounded-2xl">
-              <h2 className="font-jakarta font-extrabold text-navy text-lg mb-5">Product Requirements</h2>
-              <div className="mb-4">
-                <label className={labelClass}>Product Name *</label>
-                <input
-                  type="text"
-                  list="products-list"
-                  value={form.product}
-                  onChange={set('product')}
-                  placeholder="e.g. Caustic Soda Flakes"
-                  className={inputClass}
-                  required
-                />
-                <datalist id="products-list">
-                  {products.map(p => <option key={p.id} value={p.name} />)}
-                </datalist>
-              </div>
-              <div className="mb-4">
-                <p className="text-gray-400 text-xs font-medium mb-2">Quick select:</p>
-                <div className="flex flex-wrap gap-2">
-                  {popularProducts.map(p => (
+          {/* ── WIZARD ── */}
+          <div className="lg:col-span-2">
+            {/* Stepper */}
+            <div className="flex items-center mb-8">
+              {steps.map((s, i) => {
+                const done = i < step, current = i === step;
+                return (
+                  <Fragment key={s.title}>
                     <button
-                      key={p}
                       type="button"
-                      onClick={() => setForm(f => ({ ...f, product: p }))}
-                      className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-all ${
-                        form.product === p
-                          ? 'bg-navy text-white border-navy'
-                          : 'bg-white border-[#E5E7EB] text-gray-600 hover:border-gold hover:text-gold'
-                      }`}
+                      onClick={() => i < step && setStep(i)}
+                      className={`flex items-center gap-2.5 ${i < step ? 'cursor-pointer' : 'cursor-default'}`}
                     >
-                      {p}
+                      <span className={`w-10 h-10 rounded-full flex items-center justify-center font-jakarta font-bold text-sm transition-all ${
+                        done ? 'bg-gold text-white' : current ? 'bg-navy text-white ring-4 ring-navy/10' : 'bg-gray-100 text-gray-400'
+                      }`}>
+                        {done ? <Icon name="Check" className="w-5 h-5" strokeWidth={2.5} /> : i + 1}
+                      </span>
+                      <span className={`hidden sm:block text-sm font-semibold ${current ? 'text-navy' : done ? 'text-gold-dark' : 'text-gray-400'}`}>{s.title}</span>
                     </button>
-                  ))}
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className={labelClass}>Quantity *</label>
-                  <input type="number" value={form.quantity} onChange={set('quantity')} placeholder="25" className={inputClass} required min="1" />
-                </div>
-                <div>
-                  <label className={labelClass}>Unit</label>
-                  <select value={form.unit} onChange={set('unit')} className={inputClass}>
-                    {units.map(u => <option key={u} value={u}>{u}</option>)}
-                  </select>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className={labelClass}>Destination Port *</label>
-                  <input type="text" value={form.destinationPort} onChange={set('destinationPort')} placeholder="e.g. Mombasa, Kenya" className={inputClass} required />
-                </div>
-                <div>
-                  <label className={labelClass}>Incoterm</label>
-                  <select value={form.incoterm} onChange={set('incoterm')} className={inputClass}>
-                    {incoterms.map(t => <option key={t} value={t}>{t}</option>)}
-                  </select>
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Packaging Preference</label>
-                <input type="text" value={form.packaging} onChange={set('packaging')} placeholder="e.g. 50 kg HDPE Bags, ISO Tank" className={inputClass} />
-              </div>
+                    {i < steps.length - 1 && (
+                      <div className="flex-1 h-0.5 mx-3 rounded-full bg-gray-100 overflow-hidden">
+                        <div className={`h-full bg-gold transition-all duration-500 ${i < step ? 'w-full' : 'w-0'}`} />
+                      </div>
+                    )}
+                  </Fragment>
+                );
+              })}
             </div>
 
-            {/* Contact Details */}
-            <div className="card-white p-6 rounded-2xl">
-              <h2 className="font-jakarta font-extrabold text-navy text-lg mb-5">Contact Details</h2>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className={labelClass}>Full Name *</label>
-                  <input type="text" value={form.name} onChange={set('name')} placeholder="Your name" className={inputClass} required />
-                </div>
-                <div>
-                  <label className={labelClass}>Company</label>
-                  <input type="text" value={form.company} onChange={set('company')} placeholder="Company name" className={inputClass} />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                  <label className={labelClass}>Email *</label>
-                  <input type="email" value={form.email} onChange={set('email')} placeholder="you@company.com" className={inputClass} required />
-                </div>
-                <div>
-                  <label className={labelClass}>Phone / WhatsApp</label>
-                  <input type="tel" value={form.phone} onChange={set('phone')} placeholder="+1 234 567 8900" className={inputClass} />
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Country</label>
-                <input type="text" value={form.country} onChange={set('country')} placeholder="e.g. Kenya" className={inputClass} />
+            <div className="card-white p-6 sm:p-8 rounded-2xl overflow-hidden">
+              <AnimatePresence mode="wait" custom={dir}>
+                {/* STEP 1 - PRODUCT */}
+                {step === 0 && (
+                  <motion.div key="s0" custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+                    <h2 className="font-jakarta font-extrabold text-navy text-lg mb-1">What do you need?</h2>
+                    <p className="text-gray-400 text-sm mb-5">Choose a product and quantity.</p>
+                    <div className="mb-4">
+                      <label className={labelClass}>Product Name *</label>
+                      <input type="text" list="products-list" value={form.product} onChange={set('product')} placeholder="e.g. Caustic Soda" className={inputClass} />
+                      <datalist id="products-list">{products.map(p => <option key={p.id} value={p.name} />)}</datalist>
+                    </div>
+                    <div className="mb-5">
+                      <p className="text-gray-400 text-xs font-medium mb-2">Popular:</p>
+                      <div className="flex flex-wrap gap-2">
+                        {popularProducts.map(p => (
+                          <button key={p} type="button" onClick={() => setForm(f => ({ ...f, product: p }))}
+                            className={`text-xs px-3 py-1.5 rounded-full border font-medium transition-all ${form.product === p ? 'bg-navy text-white border-navy' : 'bg-white border-[#E5E7EB] text-gray-600 hover:border-gold hover:text-gold'}`}>
+                            {p}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="col-span-2">
+                        <label className={labelClass}>Quantity *</label>
+                        <input type="number" value={form.quantity} onChange={set('quantity')} placeholder="25" className={inputClass} min="1" />
+                      </div>
+                      <div>
+                        <label className={labelClass}>Unit</label>
+                        <select value={form.unit} onChange={set('unit')} className={inputClass}>{units.map(u => <option key={u} value={u}>{u}</option>)}</select>
+                      </div>
+                    </div>
+                    <div className="mt-4">
+                      <label className={labelClass}>Packaging Preference</label>
+                      <input type="text" value={form.packaging} onChange={set('packaging')} placeholder="e.g. 50 kg HDPE Bags, ISO Tank" className={inputClass} />
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* STEP 2 - SHIPPING */}
+                {step === 1 && (
+                  <motion.div key="s1" custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+                    <h2 className="font-jakarta font-extrabold text-navy text-lg mb-1">Where is it going?</h2>
+                    <p className="text-gray-400 text-sm mb-5">Destination &amp; trade terms.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className={labelClass}>Destination Port *</label>
+                        <input type="text" value={form.destinationPort} onChange={set('destinationPort')} placeholder="e.g. Mombasa, Kenya" className={inputClass} />
+                      </div>
+                      <div>
+                        <label className={labelClass}>Country</label>
+                        <input type="text" value={form.country} onChange={set('country')} placeholder="e.g. Kenya" className={inputClass} />
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <label className={labelClass}>Incoterm</label>
+                      <div className="flex flex-wrap gap-2">
+                        {incoterms.map(t => (
+                          <button key={t} type="button" onClick={() => setForm(f => ({ ...f, incoterm: t }))}
+                            className={`px-4 py-2 rounded-xl border text-sm font-semibold transition-all ${form.incoterm === t ? 'bg-navy text-white border-navy' : 'bg-white border-[#E5E7EB] text-gray-600 hover:border-gold hover:text-gold'}`}>
+                            {t}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <label className={labelClass}>Additional Notes</label>
+                      <textarea value={form.notes} onChange={set('notes')} rows={3} placeholder="Specific grades, certifications, delivery window…" className={`${inputClass} resize-none`} />
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* STEP 3 - CONTACT + REVIEW */}
+                {step === 2 && (
+                  <motion.div key="s2" custom={dir} variants={variants} initial="enter" animate="center" exit="exit" transition={{ duration: 0.3 }}>
+                    <h2 className="font-jakarta font-extrabold text-navy text-lg mb-1">How do we reach you?</h2>
+                    <p className="text-gray-400 text-sm mb-5">We&apos;ll send your quote here.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className={labelClass}>Full Name *</label>
+                        <input type="text" value={form.name} onChange={set('name')} placeholder="Your name" className={inputClass} />
+                      </div>
+                      <div>
+                        <label className={labelClass}>Company</label>
+                        <input type="text" value={form.company} onChange={set('company')} placeholder="Company name" className={inputClass} />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <label className={labelClass}>Email *</label>
+                        <input type="email" value={form.email} onChange={set('email')} placeholder="you@company.com" className={inputClass} />
+                      </div>
+                      <div>
+                        <label className={labelClass}>Phone / WhatsApp</label>
+                        <input type="tel" value={form.phone} onChange={set('phone')} placeholder="+1 234 567 8900" className={inputClass} />
+                      </div>
+                    </div>
+                    {/* Review summary */}
+                    <div className="rounded-xl bg-navy-pale border border-navy-light p-4">
+                      <div className="text-gray-400 text-[11px] font-bold uppercase tracking-wider mb-2">Review your request</div>
+                      <div className="grid grid-cols-2 gap-x-4 gap-y-1.5 text-sm">
+                        <div className="text-gray-500">Product</div><div className="text-navy font-semibold text-right">{form.product || '-'}</div>
+                        <div className="text-gray-500">Quantity</div><div className="text-navy font-semibold text-right">{form.quantity ? `${form.quantity} ${form.unit}` : '-'}</div>
+                        <div className="text-gray-500">Destination</div><div className="text-navy font-semibold text-right">{form.destinationPort || '-'}</div>
+                        <div className="text-gray-500">Incoterm</div><div className="text-navy font-semibold text-right">{form.incoterm}</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Nav buttons */}
+              <div className="flex items-center justify-between gap-3 mt-8 pt-6 border-t border-[#F1F5F9]">
+                <button
+                  type="button"
+                  onClick={() => go(-1)}
+                  disabled={step === 0}
+                  className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${step === 0 ? 'opacity-0 pointer-events-none' : 'text-navy hover:bg-navy-pale'}`}
+                >
+                  <Icon name="ChevronRight" className="w-4 h-4 rotate-180" /> Back
+                </button>
+
+                {step < 2 ? (
+                  <button
+                    type="button"
+                    onClick={() => stepValid(step) && go(1)}
+                    disabled={!stepValid(step)}
+                    className="btn-gold px-7 py-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0"
+                  >
+                    Continue <Icon name="ArrowRight" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => stepValid(2) && setSubmitted(true)}
+                    disabled={!stepValid(2)}
+                    className="btn-gold px-7 py-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:translate-y-0"
+                  >
+                    Submit Request <Icon name="ArrowRight" className="w-4 h-4" />
+                  </button>
+                )}
               </div>
             </div>
-
-            <div className="card-white p-6 rounded-2xl">
-              <label className={labelClass}>Additional Notes</label>
-              <textarea value={form.notes} onChange={set('notes')} rows={4} placeholder="Specific grades, certifications, delivery requirements, or any other details..." className={`${inputClass} resize-none`} />
-            </div>
-
-            <button type="submit" className="btn-gold w-full py-4 text-base justify-center">
-              Submit Quote Request →
-            </button>
-          </form>
+          </div>
 
           {/* ── SIDEBAR ── */}
           <div className="space-y-5">
-            {/* Urgency signal */}
             <div className="bg-green-50 border border-green-200 rounded-xl px-4 py-3 flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse flex-shrink-0" />
               <p className="text-green-800 text-xs font-semibold">Quotes typically sent within 24 hours</p>
             </div>
 
-            {/* Quick WA */}
             <div className="card-white p-6 rounded-2xl border-2 border-green-200">
-              <h3 className="font-jakarta font-extrabold text-navy mb-2">Quick WhatsApp Quote</h3>
-              <p className="text-gray-500 text-xs mb-4">Prefer WhatsApp? Send your requirements directly - fastest response guaranteed.</p>
-              <a
-                href={`https://wa.me/919987539258?text=${waMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-semibold hover:bg-green-100 transition-all mb-2"
-              >
-                <WaIcon />
-                WhatsApp +91 99875 39258
+              <h3 className="font-jakarta font-extrabold text-navy mb-2">Prefer WhatsApp?</h3>
+              <p className="text-gray-500 text-xs mb-4">Skip the form - your entries auto-fill the message. Fastest response.</p>
+              <a href={`https://wa.me/919987539258?text=${waMessage}`} target="_blank" rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-xl bg-green-50 border border-green-200 text-green-700 text-sm font-semibold hover:bg-green-100 transition-all">
+                <WaIcon /> WhatsApp +91 99875 39258
               </a>
-              <p className="text-gray-400 text-xs text-center">Message auto-fills from your form data</p>
             </div>
 
-            {/* What we include */}
             <div className="card-white p-6 rounded-2xl">
-              <h3 className="font-jakarta font-extrabold text-navy mb-4 text-sm">What We Include in Every Quote</h3>
+              <h3 className="font-jakarta font-extrabold text-navy mb-4 text-sm">Every Quote Includes</h3>
               <div className="space-y-2.5">
                 {['CIF/FOB pricing', 'Certificate of Analysis (COA)', 'MSDS / Safety Data Sheet', 'Certificate of Origin', 'Lead time estimate', 'Packaging options'].map(item => (
                   <div key={item} className="flex items-center gap-2.5 text-sm text-gray-600">
-                    <Icon name="Check" className="w-4 h-4 text-green-600 flex-shrink-0" strokeWidth={2.5} />
-                    {item}
+                    <Icon name="Check" className="w-4 h-4 text-green-600 flex-shrink-0" strokeWidth={2.5} /> {item}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Contact */}
             <div className="card-white p-6 rounded-2xl">
               <h3 className="font-jakarta font-extrabold text-navy mb-3 text-sm">Direct Contact</h3>
               <div className="space-y-2.5 text-sm text-gray-600">

@@ -20,7 +20,8 @@ const docs = [
 const certifications = [
   { name: 'ISO 9001:2015', desc: 'Quality Management System' },
   { name: 'ISO 14001:2015', desc: 'Environmental Management' },
-  { name: 'IMDG Compliant', desc: 'Dangerous Goods Handling' },
+  { name: 'ISO 45001:2018', desc: 'Occupational Health & Safety' },
+  { name: 'IEC + GST + RCMC', desc: 'Registered Indian Exporter' },
 ];
 
 export default function QualityPage() {
