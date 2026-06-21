@@ -23,7 +23,7 @@ export const COMPANY = {
       linkedin: 'https://www.linkedin.com/in/jitesh-vajir-2471993b6/',
       email: null as string | null,
       whatsapp: null as string | null,
-      image: '/brand/jitesh-vajir.jpg' as string | null,
+      image: '/brand/jitesh-vajir.png' as string | null,
     },
     {
       name: 'Meet Sheth',
@@ -71,7 +71,7 @@ export const CERTIFICATIONS = [
 export const GROUP = {
   name: 'Jaydev Group',
   founder: 'Jitesh Vajir',
-  founderImage: '/brand/jitesh-vajir.jpg',
+  founderImage: '/brand/jitesh-vajir.png',
   founderTitle: 'Founder & Managing Director',
   tagline: 'Connecting Chemistry, Creating Solutions',
   hq: 'Rajkot, Gujarat, India',

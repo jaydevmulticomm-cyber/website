@@ -239,7 +239,7 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
 - Products page has **two filter axes**: By Category + By Industry (reverse map built from
   `industryData.productIds`). All new products are mapped into industries so the filter works.
 - Founder/team photos: `GROUP.founderImage` + `COMPANY.team[].image` → render `<Image>` when
-  present, else initials. Jitesh's photo path: `public/brand/jitesh-vajir.jpg`.
+  present, else initials. Jitesh's photo path: `public/brand/jitesh-vajir.png`.
 
 ## Integrity note - EXIM data is NOT our shipments
 - The `Exim data/*.xlsx` files are purchased MARKET trade-intelligence (other exporters'
@@ -247,8 +247,8 @@ Bright Indian-B2B aesthetic - never make the whole site dark.
   A real Past-Shipments gallery needs the client's own invoices/BLs. Do not fabricate.
 
 ## Founder photo
-- `GROUP.founderImage` = `/brand/jitesh-vajir.jpg`; also on COMPANY.team[0].image. The file
-  must be placed at `public/brand/jitesh-vajir.jpg` (user-supplied portrait). Renders in the
+- `GROUP.founderImage` = `/brand/jitesh-vajir.png`; also on COMPANY.team[0].image. The file
+  must be placed at `public/brand/jitesh-vajir.png` (user-supplied portrait). Renders in the
   founder card, founder's-message block, and team grid (AboutClient).
 
 ## Products page (final form)
