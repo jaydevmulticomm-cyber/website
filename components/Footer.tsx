@@ -37,10 +37,10 @@ export default function Footer() {
   return (
     <footer className="bg-navy border-t border-navy-mid">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-x-8 gap-y-9 lg:gap-y-8">
 
           {/* Brand + Contact */}
-          <div className="col-span-2 md:col-span-3 lg:col-span-2">
+          <div className="md:col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-3">
               <MoleculeMark className="w-10 h-10 flex-shrink-0" />
               <div>

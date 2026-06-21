@@ -23,14 +23,16 @@ export default function MobileNav() {
 
   return (
     <nav className="lg:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-[60] w-[calc(100%-1rem)] max-w-md pointer-events-none">
-      <div className="pointer-events-auto flex items-stretch justify-around gap-0.5 p-1.5 rounded-[1.7rem] bg-white/70 backdrop-blur-2xl border border-white/70 shadow-[0_12px_40px_-6px_rgba(14,32,64,0.4)]">
+      <div className="pointer-events-auto relative overflow-hidden flex items-stretch justify-around gap-0.5 p-1.5 rounded-[1.7rem] bg-white/45 backdrop-blur-2xl backdrop-saturate-[1.8] border border-white/50 ring-1 ring-inset ring-white/40 shadow-[0_14px_44px_-6px_rgba(14,32,64,0.5)]">
+        {/* glossy top sheen */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-white/45 to-transparent" />
         {ITEMS.map((item) => {
           const active = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex-1 flex flex-col items-center gap-0.5 py-1.5 rounded-2xl transition-colors ${
+              className={`relative z-10 flex-1 flex flex-col items-center gap-0.5 py-1.5 rounded-2xl transition-colors ${
                 item.cta
                   ? 'bg-gold text-white shadow-sm'
                   : active
