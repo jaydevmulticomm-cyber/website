@@ -180,7 +180,7 @@ export default function Philosophy() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-[180px_1fr] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[180px_minmax(0,1fr)] gap-8">
           {/* ── numbered engineering-notation rail ── */}
           <div className="hidden lg:block">
             <div className="sticky top-1/2 -translate-y-1/2 py-10">
