@@ -26,7 +26,7 @@ export const COMPANY = {
       image: '/brand/jitesh-vajir.png' as string | null,
     },
     {
-      name: 'Meet Sheth',
+      name: 'Meet S',
       role: 'Marketing & Export Operations',
       bio: 'Overseeing marketing, documentation, logistics, and export compliance to ensure seamless delivery to global buyers.',
       linkedin: 'https://www.linkedin.com/in/meet-sheth-0871/',
@@ -35,7 +35,7 @@ export const COMPANY = {
       image: null as string | null,
     },
     {
-      name: 'Darsh Katkoria',
+      name: 'Darsh K',
       role: 'Business Development',
       bio: 'Driving international partnerships and client acquisition across East Africa, GCC, and Southeast Asia.',
       linkedin: 'https://www.linkedin.com/in/darsh-k-07579a3b5/',
